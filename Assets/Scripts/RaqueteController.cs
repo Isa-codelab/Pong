@@ -8,6 +8,7 @@ public class RaqueteController : MonoBehaviour
     private Vector3 minhapos;
     public float  meuEixoy;
     public float velocidade = 5f;
+    public float meuLimite = 3.5f;
 
     void Start()
     {
@@ -26,12 +27,19 @@ public class RaqueteController : MonoBehaviour
 
         //pegando a setinha para cima 
         if (Input.GetKey(KeyCode.UpArrow)){ 
-            //aumenta valor do meu y
-            meuEixoy = meuEixoy + velocidade * Time.deltaTime;
+
+            //checar se o y é menor do que o limite
+            if(meuEixoy < meuLimite)
+            {
+                //aumenta valor do meu y
+                meuEixoy = meuEixoy + velocidade * Time.deltaTime;
+
+            }
 
         };
 
-        if(Input.GetKey(KeyCode.DownArrow)){
+        if(Input.GetKey(KeyCode.DownArrow) && meuEixoy > -meuLimite){
+
             //diminuir o valor do meu y
             meuEixoy = meuEixoy - velocidade * Time.deltaTime;
         };
