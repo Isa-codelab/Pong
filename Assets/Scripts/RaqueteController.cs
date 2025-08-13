@@ -74,7 +74,10 @@ public class RaqueteController : MonoBehaviour
 
         }
         else {
-            meuEixoy = bolaTranform.position.y; 
+            meuEixoy = bolaTranform.position.y;
+
+            //Para acessar funções matemáticas, nós usamos a classe MathF
+            meuEixoy = Mathf.Lerp(meuEixoy, bolaTranform.position.y, 0.1f);
         }
 
         //limitar a raquete
