@@ -41,14 +41,14 @@ public class RaqueteController : MonoBehaviour
 
             if (player1)
             {
-                if (Input.GetKey(KeyCode.UpArrow))
+                if (Input.GetKey(KeyCode.W))
                 {
                     //aumenta valor do meu y
                     meuEixoy = meuEixoy + deltavelocidade;
                 }
                 ;
 
-                if (Input.GetKey(KeyCode.DownArrow))
+                if (Input.GetKey(KeyCode.S))
                 {
 
                     //diminuir o valor do meu y
@@ -59,13 +59,13 @@ public class RaqueteController : MonoBehaviour
             }
             else
             {
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.UpArrow))
                 {
                     //aumenta valor do meu y
                     meuEixoy = meuEixoy + deltavelocidade;
 
                 }
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.DownArrow))
                 {
                     //diminuir o valor do meu y
                     meuEixoy = meuEixoy - deltavelocidade;
@@ -74,7 +74,12 @@ public class RaqueteController : MonoBehaviour
 
         }
         else {
-            meuEixoy = bolaTranform.position.y;
+            //checando se a setinha para cima´para cima ou para baixo pressionada
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+            {
+                
+                automatico = false;
+            }
 
             //Para acessar funções matemáticas, nós usamos a classe MathF
             meuEixoy = Mathf.Lerp(meuEixoy, bolaTranform.position.y, 0.1f);
