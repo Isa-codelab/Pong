@@ -50,8 +50,8 @@ public class RaqueteController : MonoBehaviour
         {
             if(Input.GetKey(KeyCode.W))
             {
-                    //aumenta valor do meu y
-                    meuEixoy = meuEixoy + deltavelocidade;
+                //aumenta valor do meu y
+                meuEixoy = meuEixoy + deltavelocidade;
                 
             }
             if (Input.GetKey(KeyCode.S))
