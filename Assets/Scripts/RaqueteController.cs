@@ -10,6 +10,10 @@ public class RaqueteController : MonoBehaviour
     public float velocidade = 5f;
     public float meuLimite = 3.5f;
 
+    //identificar se é o player 1 ou 2
+    public bool player1;
+
+
     void Start()
     {
         minhapos = transform.position; // pega a posição atual do objeto
@@ -18,31 +22,54 @@ public class RaqueteController : MonoBehaviour
 
     void Update()
     {
+        
         //passando o y 
         minhapos.y = meuEixoy;
 
         //modificar a posição da raquete
         transform.position = minhapos;
 
+        float deltavelocidade = velocidade * Time.deltaTime;
 
-        //pegando a setinha para cima 
-        if (Input.GetKey(KeyCode.UpArrow)){ 
-
-            //checar se o y é menor do que o limite
-            if(meuEixoy < meuLimite)
+        if (player1) {
+            if (Input.GetKey(KeyCode.UpArrow))
             {
-                //aumenta valor do meu y
-                meuEixoy = meuEixoy + velocidade * Time.deltaTime;
 
+                //checar se o y é menor do que o limite
+                if (meuEixoy < meuLimite)
+                {
+                    //aumenta valor do meu y
+                    meuEixoy = meuEixoy + deltavelocidade;
+
+                }
+
+            };
+
+            if (Input.GetKey(KeyCode.DownArrow) && meuEixoy > -meuLimite)
+            {
+
+                //diminuir o valor do meu y
+                meuEixoy = meuEixoy - deltavelocidade;
+            };
+
+        }
+        else
+        {
+            if(Input.GetKey(KeyCode.W))
+            {
+                //checar se o y é menor do que o limite
+                if (meuEixoy < meuLimite)
+                {
+                    //aumenta valor do meu y
+                    meuEixoy = meuEixoy + deltavelocidade;
+                }
             }
-
-        };
-
-        if(Input.GetKey(KeyCode.DownArrow) && meuEixoy > -meuLimite){
-
-            //diminuir o valor do meu y
-            meuEixoy = meuEixoy - velocidade * Time.deltaTime;
-        };
+            if (Input.GetKey(KeyCode.S) && meuEixoy > -meuLimite)
+            {
+                //diminuir o valor do meu y
+                meuEixoy = meuEixoy - deltavelocidade;
+            }
+        }
 
     }
 }
