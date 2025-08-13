@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class BolaController : MonoBehaviour
 {
+    public Transform transformCamera;
+
+    public AudioClip somColisao;
+
     public Rigidbody2D rb;
+
     private Vector2 minhaVelocidade;
 
     public float velocidade = 5f;
@@ -54,5 +59,10 @@ public class BolaController : MonoBehaviour
             //recarrega a cena
             SceneManager.LoadScene("Game");
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AudioSource.PlayClipAtPoint(somColisao, transformCamera.position);
     }
 }
