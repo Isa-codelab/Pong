@@ -59,6 +59,11 @@ public class RaqueteController : MonoBehaviour
             }
             else
             {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    automatico = true;
+                }
+
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
                     //aumenta valor do meu y

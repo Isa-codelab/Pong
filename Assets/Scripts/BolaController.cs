@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BolaController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class BolaController : MonoBehaviour
     private Vector2 minhaVelocidade;
 
     public float velocidade = 5f;
+
+    public float limiteHorizontal = 12f;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,13 @@ public class BolaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //checando se a bola saiu da tela
+        if (transform.position.x > limiteHorizontal || transform.position.x < -limiteHorizontal)
+        {
+            Debug.LogError("Acabou o jogo");
+
+            //recarrega a cena
+            SceneManager.LoadScene("Game");
+        }
     }
 }
