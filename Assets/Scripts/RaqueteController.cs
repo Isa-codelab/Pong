@@ -34,18 +34,11 @@ public class RaqueteController : MonoBehaviour
         if (player1) {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-
-                //checar se o y é menor do que o limite
-                if (meuEixoy < meuLimite)
-                {
-                    //aumenta valor do meu y
-                    meuEixoy = meuEixoy + deltavelocidade;
-
-                }
-
+                //aumenta valor do meu y
+                meuEixoy = meuEixoy + deltavelocidade;
             };
 
-            if (Input.GetKey(KeyCode.DownArrow) && meuEixoy > -meuLimite)
+            if (Input.GetKey(KeyCode.DownArrow))
             {
 
                 //diminuir o valor do meu y
@@ -57,19 +50,25 @@ public class RaqueteController : MonoBehaviour
         {
             if(Input.GetKey(KeyCode.W))
             {
-                //checar se o y é menor do que o limite
-                if (meuEixoy < meuLimite)
-                {
                     //aumenta valor do meu y
                     meuEixoy = meuEixoy + deltavelocidade;
-                }
+                
             }
-            if (Input.GetKey(KeyCode.S) && meuEixoy > -meuLimite)
+            if (Input.GetKey(KeyCode.S))
             {
                 //diminuir o valor do meu y
                 meuEixoy = meuEixoy - deltavelocidade;
             }
         }
 
+        //limitar a raquete
+        if(meuEixoy > meuLimite)
+        {
+            meuEixoy = meuLimite;
+        }
+        if (meuEixoy < -meuLimite)
+        {
+            meuEixoy = -meuLimite;
+        }
     }
 }
