@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class RaqueteController : MonoBehaviour
 {
+    public Transform bolaTranform;
+
+    // se for true, a raquete segue a bola automaticamente
+    public bool automatico = false;
+
     // criando o meu vector 3 - classe que representa um ponto no espaço 3D
     private Vector3 minhapos;
+
     public float  meuEixoy;
     public float velocidade = 5f;
     public float meuLimite = 3.5f;
@@ -22,7 +28,7 @@ public class RaqueteController : MonoBehaviour
 
     void Update()
     {
-        
+
         //passando o y 
         minhapos.y = meuEixoy;
 
@@ -31,38 +37,48 @@ public class RaqueteController : MonoBehaviour
 
         float deltavelocidade = velocidade * Time.deltaTime;
 
-        if (player1) {
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                //aumenta valor do meu y
-                meuEixoy = meuEixoy + deltavelocidade;
-            };
+        if (!automatico){
 
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (player1)
             {
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    //aumenta valor do meu y
+                    meuEixoy = meuEixoy + deltavelocidade;
+                }
+                ;
 
-                //diminuir o valor do meu y
-                meuEixoy = meuEixoy - deltavelocidade;
-            };
+                if (Input.GetKey(KeyCode.DownArrow))
+                {
+
+                    //diminuir o valor do meu y
+                    meuEixoy = meuEixoy - deltavelocidade;
+                }
+                ;
+
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.W))
+                {
+                    //aumenta valor do meu y
+                    meuEixoy = meuEixoy + deltavelocidade;
+
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    //diminuir o valor do meu y
+                    meuEixoy = meuEixoy - deltavelocidade;
+                }
+            }
 
         }
-        else
-        {
-            if(Input.GetKey(KeyCode.W))
-            {
-                //aumenta valor do meu y
-                meuEixoy = meuEixoy + deltavelocidade;
-                
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                //diminuir o valor do meu y
-                meuEixoy = meuEixoy - deltavelocidade;
-            }
+        else {
+            meuEixoy = bolaTranform.position.y; 
         }
 
         //limitar a raquete
-        if(meuEixoy > meuLimite)
+        if (meuEixoy > meuLimite)
         {
             meuEixoy = meuLimite;
         }
@@ -70,5 +86,6 @@ public class RaqueteController : MonoBehaviour
         {
             meuEixoy = -meuLimite;
         }
+
     }
 }
