@@ -7,7 +7,7 @@ public class BolaController : MonoBehaviour
 {
     public bool jogoiniciado = false;
 
-    public float delay = 2f;
+    public float delay = 3f;
 
     public Transform transformCamera;
 
@@ -23,6 +23,7 @@ public class BolaController : MonoBehaviour
    
     void Start()
     {
+        transform.position = Vector2.zero;
     }
 
     void Update()
@@ -30,30 +31,33 @@ public class BolaController : MonoBehaviour
         //iniciar a bola com delay
         delay = delay - Time.deltaTime;
 
-        if(delay <= 0 || jogoiniciado == false)
+
+
+        if(delay <= 0 && jogoiniciado == false)
         {
             jogoiniciado = true;
 
             int direcao = Random.Range(0, 4);
 
-            switch (direcao)
+            if(direcao == 0)
             {
-                case 0:
-                    minhaVelocidade.x = velocidade;
-                    minhaVelocidade.y = velocidade;
-                    break;
-                case 1:
-                    minhaVelocidade.x = -velocidade;
-                    minhaVelocidade.y = velocidade;
-                    break;
-                case 2:
-                    minhaVelocidade.x = velocidade;
-                    minhaVelocidade.y = -velocidade;
-                    break;
-                case 3:
-                    minhaVelocidade.x = -velocidade;
-                    minhaVelocidade.y = -velocidade;
-                    break;
+                minhaVelocidade.x = velocidade;
+                minhaVelocidade.y = velocidade;
+            }
+            else if(direcao == 1)
+            {
+                minhaVelocidade.x = -velocidade;
+                minhaVelocidade.y = velocidade;
+            }
+            else if(direcao == 2)
+            {
+                minhaVelocidade.x = velocidade;
+                minhaVelocidade.y = -velocidade;
+            }
+            else
+            {
+                minhaVelocidade.x = -velocidade;
+                minhaVelocidade.y = -velocidade;
             }
 
             rb.velocity = minhaVelocidade;
