@@ -39,57 +39,19 @@ public class RaqueteController : MonoBehaviour
 
         if (!automatico){
 
-            if (player1)
-            {
-                if (Input.GetKey(KeyCode.W))
-                {
-                    //aumenta valor do meu y
-                    meuEixoy = meuEixoy + deltavelocidade;
-                }
-                ;
-
-                if (Input.GetKey(KeyCode.S))
-                {
-
-                    //diminuir o valor do meu y
-                    meuEixoy = meuEixoy - deltavelocidade;
-                }
-                ;
-
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    automatico = true;
-                }
-
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    //aumenta valor do meu y
-                    meuEixoy = meuEixoy + deltavelocidade;
-
-                }
-                if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    //diminuir o valor do meu y
-                    meuEixoy = meuEixoy - deltavelocidade;
-                }
-            }
+          ManualInput(deltavelocidade);
 
         }
         else {
-            //checando se a setinha para cima´para cima ou para baixo pressionada
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
-            {
-                
-                automatico = false;
-            }
-
-            //Para acessar funções matemáticas, nós usamos a classe MathF
-            meuEixoy = Mathf.Lerp(meuEixoy, bolaTranform.position.y, 0.1f);
+            AutomaticInput();
         }
 
+        LimitRacket();
+
+    }
+
+    private void LimitRacket()
+    {
         //limitar a raquete
         if (meuEixoy > meuLimite)
         {
@@ -99,6 +61,64 @@ public class RaqueteController : MonoBehaviour
         {
             meuEixoy = -meuLimite;
         }
+    }
 
+    private void AutomaticInput()
+    {
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+        {
+
+            automatico = false;
+        }
+
+        //Para acessar funções matemáticas, nós usamos a classe MathF
+        meuEixoy = Mathf.Lerp(meuEixoy, bolaTranform.position.y, 0.1f);
+    }
+    private void ManualInput( float deltavelocidade)
+    {
+        if (player1)
+        {
+            InputPlayer1(deltavelocidade);
+
+        }
+        else
+        {
+            InputPlayer2(deltavelocidade);
+        }
+    }
+    private void InputPlayer1( float deltav)
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            //aumenta valor do meu y
+            meuEixoy = meuEixoy + deltav;
+        };
+
+        if (Input.GetKey(KeyCode.S))
+        {
+
+            //diminuir o valor do meu y
+            meuEixoy = meuEixoy - deltav;
+        };
+    }
+
+    private void InputPlayer2(float deltav)
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            automatico = true;
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            //aumenta valor do meu y
+            meuEixoy = meuEixoy + deltav;
+
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            //diminuir o valor do meu y
+            meuEixoy = meuEixoy - deltav;
+        }
     }
 }
