@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("TestsEditMode")]
+
+
 public class RaqueteController : MonoBehaviour
 {
     public Transform bolaTranform;
@@ -50,7 +55,7 @@ public class RaqueteController : MonoBehaviour
 
     }
 
-    private void LimitRacket()
+    internal void LimitRacket()
     {
         //limitar a raquete
         if (meuEixoy > meuLimite)
