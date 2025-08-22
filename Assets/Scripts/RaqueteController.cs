@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("TestsEditMode")]
+
 
 
 public class RaqueteController : MonoBehaviour
