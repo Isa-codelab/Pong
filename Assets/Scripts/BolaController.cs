@@ -20,10 +20,13 @@ public class BolaController : MonoBehaviour
     public float velocidade = 5f;
 
     public float limiteHorizontal = 12f;
-   
+
+    public BolaService bolaService;
+
     void Start()
     {
         transform.position = Vector2.zero;
+        bolaService = new BolaService();
     }
 
     void Update()
@@ -31,34 +34,13 @@ public class BolaController : MonoBehaviour
         //iniciar a bola com delay
         delay = delay - Time.deltaTime;
 
-
-
-        if(delay <= 0 && jogoiniciado == false)
+        if (bolaService.ChecaJogoIniciado(delay, jogoiniciado))
         {
             jogoiniciado = true;
 
             int direcao = Random.Range(0, 4);
 
-            if(direcao == 0)
-            {
-                minhaVelocidade.x = velocidade;
-                minhaVelocidade.y = velocidade;
-            }
-            else if(direcao == 1)
-            {
-                minhaVelocidade.x = -velocidade;
-                minhaVelocidade.y = velocidade;
-            }
-            else if(direcao == 2)
-            {
-                minhaVelocidade.x = velocidade;
-                minhaVelocidade.y = -velocidade;
-            }
-            else
-            {
-                minhaVelocidade.x = -velocidade;
-                minhaVelocidade.y = -velocidade;
-            }
+            minhaVelocidade = bolaService.PosiçãoRandomica(direcao, velocidade, minhaVelocidade);
 
             rb.velocity = minhaVelocidade;
         }
